@@ -11,15 +11,23 @@ const { ApolloServer } = require('apollo-server-express');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// create a new apollo server and pass in schema data
+// create server object
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware
 });
 
-// integrate apollo server with express app as middleware
-server.applyMiddleware({ app });
+const startServer = async () => {
+  await server.start();
+  server.applyMiddleware({app});
+};
+
+startServer();
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
