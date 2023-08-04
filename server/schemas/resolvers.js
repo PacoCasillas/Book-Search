@@ -19,8 +19,8 @@ const resolvers = {
 
     Mutation: {
         // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
-        addUser: async (parent, { name, email, password }) => {
-            const user = await User.create({ name, email, password });
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
             const token = signToken(user);
 
             return { token, user };
@@ -41,11 +41,11 @@ const resolvers = {
         },
         // save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
         // user comes from `req.user` created in the auth middleware function
-        saveBook: async (parent, { book }, context) => {
+        saveBook: async (parent, { bookData }, context) => {
             if (context.user) {
                 return await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { savedBooks: book } },
+                    { $addToSet: { savedBooks: bookData } },
                     { new: true, runValidators: true }
                 );
             }

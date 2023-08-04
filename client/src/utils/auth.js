@@ -17,7 +17,7 @@ class AuthService {
     // return !!token && !this.isTokenExpired(token); // handwaiving here
 
     // to because its easier to read **
-    return !!token && !this.isTokenExpired(token) ? true : false;
+    return !!token && !this.isTokenExpired(token);
   }
 
   // check if token is expired
