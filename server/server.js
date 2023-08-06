@@ -18,12 +18,12 @@ const server = new ApolloServer({
   context: authMiddleware
 });
 
-const startServer = async () => {
-  await server.start();
-  server.applyMiddleware({app});
-};
+// const startServer = async () => {
+//   await server.start();
+//   server.applyMiddleware({app});
+// };
 
-startServer();
+// startServer();
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
@@ -37,8 +37,25 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-db.once('open', () => {
-  app.listen(PORT, () => 
-  console.log(`🌍 Now listening on localhost:${PORT}`));
-  console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-});
+// db.once('open', () => {
+//   app.listen(PORT, () => 
+//   console.log(`🌍 Now listening on localhost:${PORT}`));
+//   console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+// });
+
+const startServer = async () => {
+  try {
+    await new Promise((resolve, reject) => {
+      db.once('open', resolve);
+      db.on('error', reject);
+    });
+    await server.start();
+    server.applyMiddleware({ app });
+    app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
+    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  } catch (error) {
+    console.error('Error connecting to the database:', error);
+  }
+};
+
+startServer();
