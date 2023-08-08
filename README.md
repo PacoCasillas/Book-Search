@@ -17,11 +17,15 @@ This application was created to refine my MERN stack skills
 
 ## Installation
 
-To use this application you can click on the link to the live application, also it can be downloaded via zip file and opened locally. In order to do so you will need to run the command ```npm install`` followed by ```npm run develop```
+To use this application you can click on the link to the live application, also it can be downloaded via zip file and opened locally. In order to do so you will need to run the command ```npm install```  followed by  ```npm run develop```.
 
 ## Usage
 
-the following images will show the use and look of the application
+Link to live application: [link](https://git.heroku.com/morning-springs-01382.git)
+
+The following images will show the use and look of the application:
+
+
 
 
 ## License

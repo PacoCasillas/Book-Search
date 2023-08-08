@@ -43,12 +43,15 @@ const resolvers = {
         // user comes from `req.user` created in the auth middleware function
         saveBook: async (parent, { bookData }, context) => {
             if (context.user) {
-                return await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $addToSet: { savedBooks: bookData } },
-                    { new: true, runValidators: true }
-                );
+              const updatedUser = await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $push: { savedBooks: bookData } },
+                { new: true }
+              );
+      
+              return updatedUser;
             }
+      
             throw new AuthenticationError('You need to be logged in!');
         },
         // remove a book from `savedBooks`
