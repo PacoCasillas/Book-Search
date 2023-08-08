@@ -25,6 +25,21 @@ Link to live application: [link](https://git.heroku.com/morning-springs-01382.gi
 
 The following images will show the use and look of the application:
 
+When you first load the page this is what it will look like:
+
+![](./README%20images/homepage.png)
+
+Then if you click on the top right login/Sign Up button you will get this pop up 
+
+![](./README%20images/login.png)
+
+To create an account these are the details you will want to fill
+
+![](./README%20images/signup.png)
+
+Once You type in a book in the search bar this is how it will load
+
+![](./README%20images/searches.png)
 
 
 
@@ -38,7 +53,7 @@ N/A
 
 ## Tests
 
-Many test runs were executed to make sure it all works properly
+Many test runs were executed to make sure it all works properly. At this time the saved book function isnt available
 
 ## Questions
 
